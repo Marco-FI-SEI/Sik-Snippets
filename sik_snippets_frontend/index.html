@@ -7,8 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/bcee8edc30.js" crossorigin="anonymous"></script>
+
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="styles/styles.css" type="text/css">
+  <link rel="stylesheet" href="styles/style.css" type="text/css">
 
   <title>Sik Snippets</title>
 </head>
@@ -27,18 +30,56 @@
         <span class="Code_bracket">}</span>
       </span>nippets</h1>
   </div>
+
   <div class="Info">
-    <li class="InfoItem">Save that brainpower for novel complexities...</li>
 
-    <li class="InfoItem">Never forget your best moments of inspiration...</li>
-
-    <li class="InfoItem">Share any of your snippets complete with notes...</li>
+    <ul>
+      <li class="InfoItem">Save that brainpower for novel complexities...</li>
+      <li class="InfoItem">Never forget your best moments of inspiration...</li>
+      <li class="InfoItem">Share any of your snippets complete with notes...</li>
+    </ul>
 
     <div class="ButtonBox">
-      <button class="SignUpButton Button">Sign Up</button>
-      <button class="LoginButton Button">Log In</button>
+      <button type="button" class="SignUpButton ModalTrigger Button">Sign Up</button>
+      <button type="button" class="LoginButton ModalTrigger Button">Log In</button>
     </div>
+
+    <div class="FormModal">
+      <i class="far fa-times-circle Modal_close"></i>
+      <form method="POST" class="ContactForm">
+        <div class="ContactForm_row">
+          <label for="firstName">First Name</label>
+          <input type="text" name="firstName">
+        </div>
+        <div class="ContactForm_row">
+          <label for="email">Email</label>
+          <input type="email" name="email">
+        </div>
+        <div class="ContactForm_row">
+          <label for="password">Password</label>
+          <input type="password" name="password">
+        </div>
+        <div class="ContactForm_row">
+          <label for="password_confirmation">Repeat Password</label>
+          <input type="password_confirmation" name="password_confirmation">
+        </div>
+        <div class="ContactForm_row">
+          <button class="SubmitButton Button">Submit</button>
+        </div>
+      </form>
+    </div>
+
+
   </div>
+
+  <script src="src/components/app.js"></script>
+  <script src="src/adapters/SnippetCategoriesAdapter.js"></script>
+  <script src="src/components/snippetCategories.js"></script>
+  <script src="src/components/snippetCategory.js"></script>
+  <script src="src/index.js"></script>
+  <script src="src/views/domjs"></script>
+  <script src="src/views/form.js"></script>
+
 </body>
 
 </html>

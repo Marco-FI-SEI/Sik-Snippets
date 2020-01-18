@@ -91,6 +91,11 @@ html {
   position: relative;
 }
 
+.Blackout {
+  /* background-color: rgba(0, 0, 0, .65); */
+  background-color: red;
+}
+
 /* .Page > * {
   border: 2px solid yellow;
 } */
@@ -170,6 +175,37 @@ html {
   letter-spacing: 2px;
 }
 
+/* -------------------------------------------------- */
+/* FORM */
+/* -------------------------------------------------- */
+
+.FormModal {
+  border: solid 1px white;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+/* .FormModal i {
+} */
+
+.ContactForm_row {
+  margin: 40px;
+}
+
+.ContactForm_row:last-child {
+  text-align: right;
+}
+
+.ContactForm input {
+  font-size: 1.5rem;
+}
+
+.SubmitButton:hover {
+  cursor: pointer;
+  border-color: #F1FF7E;
+  color: #F1FF7E;
+  transition: ease-in 0.2s;
+}
 
 /* -------------------------------------------------- */
 /* ROWS */
