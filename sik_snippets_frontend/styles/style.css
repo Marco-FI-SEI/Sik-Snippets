@@ -49,13 +49,13 @@ html {
   cursor: pointer;
 }
 
-.SignUpButton:hover {
+.ButtonBox-signUpButton:hover {
   border-color: #82E9FF;
   color: #82E9FF;
   transition: ease-in 0.2s;
 }
 
-.LoginButton:hover {
+.ButtonBox-loginButton:hover {
   border-color: #FF63C3;
   color: #FF63C3;
   transition: ease-in 0.2s;
@@ -92,8 +92,20 @@ html {
 }
 
 .Blackout {
-  /* background-color: rgba(0, 0, 0, .65); */
-  background-color: red;
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark);
+  display: none;
+  opacity: 0.9;
+}
+
+.Light {
+  background-color: white;
+  color: var(--dark);
 }
 
 /* .Page > * {
@@ -130,25 +142,25 @@ html {
   letter-spacing: -1.2rem;
 }
 
-.Code_bracket {
+.Code-Bracket {
   color: #48FF6C;
 }
 
-.Code_first {
+.Code-First {
   color: red;
 
 }
 
-.Code_second {
+.Code-Second {
   color: #82E9FF;
 
 }
 
-.Code_third {
+.Code-Third {
   color: #FF63C3;
 }
 
-.Code_fourth {
+.Code-Fourth {
   color: #F1FF7E;
 }
 
@@ -169,7 +181,7 @@ html {
   padding-bottom: 50px;
 }
 
-.InfoItem {
+.Info-item {
   margin: 20px;
   list-style: none;
   letter-spacing: 2px;
@@ -183,24 +195,36 @@ html {
   border: solid 1px white;
   border-radius: 5px;
   margin: 10px;
+  display: none;
+}
+
+.FormModal-close:hover {
+  cursor: pointer;
+}
+
+.Visible {
+  position: absolute;
+
+  display: block;
+  z-index: 1010;
 }
 
 /* .FormModal i {
 } */
 
-.ContactForm_row {
+.Form-row {
   margin: 40px;
 }
 
-.ContactForm_row:last-child {
+.Form-row:last-child {
   text-align: right;
 }
 
-.ContactForm input {
+.Form-input {
   font-size: 1.5rem;
 }
 
-.SubmitButton:hover {
+.Form-submitButton:hover {
   cursor: pointer;
   border-color: #F1FF7E;
   color: #F1FF7E;

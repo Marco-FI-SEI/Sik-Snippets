@@ -1,23 +1,23 @@
-import { dom } from './dom'
+// dom.authButtons.forEach(btn => {
+//   btn.addEventListener('click', () => {
+//     // dom.formModal.classList.add('Visible')
+//     // dom.page.classList.add('Blackout')
 
-dom.authButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    dom.formModal.classList.add('Visible')
-    dom.page.classList.add('Blackout')
+//     // dom.modalClose.addEventListener('click', () => {
+//     //   dom.formModal.classList.remove('Visible')
+//     //   dom.page.classList.remove('Blackout')
+//     // })
 
-    dom.modalClose.addEventListener('click', () => {
-      dom.formModal.classList.remove('Visible')
-      dom.page.classList.remove('Blackout')
-    })
+//     // dom.page.addEventListener('click', () => {
+//     //   dom.formModal.classList.remove('Visible')
+//     //   dom.page.classList.remove('Blackout')
+//     // })
+//     dom.page.classList.add('Visible')
+//     console.log(dom.page.classList)
+//   })
+// })
 
-    dom.page.addEventListener('click', () => {
-      dom.formModal.classList.remove('Visible')
-      dom.page.classList.remove('Blackout')
-    })
-  })
-})
-
-export const renderForm = () => {
+const renderForm = () => {
   const markup = `
     <form method="POST" class="ContactForm">
       <div class="ContactForm_row">
