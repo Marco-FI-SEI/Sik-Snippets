@@ -1,18 +1,19 @@
-class Api::v1::SnippetCategoriesController < ApplicationController
+class Api::V1::SnippetCategoriesController < ApplicationController
   before_action :set_snippet_category, only: [:show, :update, :destroy]
+  before_action :require_login
 
   def index
     @snippet_categories = SnippetCategory.all
-    json_response(@snippet_categories, "SUCCESS")
+    json_response(object: @snippet_categories)
   end
 
   def create
     @snippet_category = SnippetCategory.create!(snippet_category_params)
-    json_response(@snippet_category, "Snippet Category saved!", :created)
+    json_response(object: @snippet_category, message: "Snippet Category saved!", status: :created)
   end
 
   def show
-    json_response(@snippet_category, "SUCCESS")
+    json_response(object: @snippet_category)
   end
 
   def update
@@ -32,6 +33,6 @@ class Api::v1::SnippetCategoriesController < ApplicationController
   end
 
   def snippet_category_params
-    params.permit(:title)
+    params.require(:snippet_category).permit(:title)
   end
 end
