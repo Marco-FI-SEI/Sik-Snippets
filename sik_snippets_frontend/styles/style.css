@@ -75,10 +75,6 @@ html {
 }
 
 
-
-
-
-
 /* -------------------------------------------------- */
 /* PAGE */
 /* -------------------------------------------------- */
@@ -111,6 +107,76 @@ html {
 /* .Page > * {
   border: 2px solid yellow;
 } */
+
+/* -------------------------------------------------- */
+/* PROFILE*/
+/* -------------------------------------------------- */
+
+.Profile {
+  height: 80vh;
+  width: 100%;
+  display: grid;
+  margin-top: 50px;;
+  grid-template-areas: "sidebar category snippet editor";
+  grid-template-columns: 0.1fr 0.5fr 0.5fr 1.75fr;
+}
+
+.Profile > * {
+  border: 2px solid yellow;
+}
+
+.Sidebar {
+  grid-area: sidebar;
+}
+
+.Sidebar-book {
+  margin: 5px;
+}
+
+.CategoryColumn {
+  grid-area: category;
+  overflow: auto;
+  resize: horizontal;
+  min-width: 20vw;
+  max-width: 25vw;
+
+}
+.SnippetColumn {
+  grid-area: snippet;
+  overflow: auto;
+  resize: horizontal;
+  min-width: 20vw;
+  max-width: 25vw;
+}
+.EditorColumn {
+  grid-area: editor;
+
+
+}
+
+.EditorColumn-Editor {
+  height: 100%;
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* -------------------------------------------------- */
 /* TITLE */

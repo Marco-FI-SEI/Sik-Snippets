@@ -24,6 +24,13 @@ const togglePageLightMode = () => {
   domElements.page.classList.toggle('Light')
 }
 
+const updateAppState = (...stateItems) => {
+  for (const item of stateItems) {
+    appState[item] = !appState[item]
+  }
+  console.log(appState)
+}
+
 const displayFormModal = () => {
   if (appState["isLoginSelected"]) {
     const { nameRow, passwordConfirmationRow } = domElements
@@ -35,13 +42,6 @@ const displayFormModal = () => {
   domElements.formModal.classList.add('Login')
   domElements.blackout.style.display = 'block'
   updateAppState("isFormVisible")
-}
-
-const restoreForm = () => {
-  const { nameRow, emailRow, passwordRow, passwordConfirmationRow } = domElements
-
-  emailRow.insertAdjacentElement('beforebegin', nameRow)
-  passwordRow.insertAdjacentElement('afterend', passwordConfirmationRow)
 }
 
 const hideFormModal = () => {
@@ -56,11 +56,16 @@ const hideFormModal = () => {
   }
 }
 
-const updateAppState = (...stateItems) => {
-  for (const item of stateItems) {
-    appState[item] = !appState[item]
-  }
-  console.log(appState)
+const restoreForm = () => {
+  const {
+    nameRow,
+    emailRow,
+    passwordRow,
+    passwordConfirmationRow
+  } = domElements
+
+  emailRow.insertAdjacentElement('beforebegin', nameRow)
+  passwordRow.insertAdjacentElement('afterend', passwordConfirmationRow)
 }
 
 const buildFormData = (flag) => {
@@ -95,8 +100,19 @@ const enableUser = (flag, obj) => {
   const credentialsObj = { withCredentials: true }
   fetch(`${baseUrl}${flag}`, obj, credentialsObj)
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => handleSession(json.data))
     .catch(error => console.log(error.message))
+}
+
+const handleSession = (data) => {
+  if (data.status === "created") {
+    updateAppState("isUserLoggedIn")
+    renderUserProfile()
+  }
+}
+
+const renderUserProfile = () => {
+  
 }
 
 domElements.lightSwitch.addEventListener('click', () => {

@@ -16,8 +16,9 @@
   <title>Sik Snippets</title>
 </head>
 
-<body class="Page">
-  <div class="Blackout"></div>
+<body>
+  <div class="Page">
+    <div class="Blackout"></div>
     <div class="LightSwitch">💡</div>
 
     <div class="Header">
@@ -32,7 +33,7 @@
         </span>nippets</h1>
     </div>
 
-    <div class="Info">
+    <div class="Info" style="display:none">
 
       <ul>
         <li class="Info-Item">Save that brainpower for novel complexities...</li>
@@ -70,6 +71,31 @@
         </form>
       </div>
     </div>
+
+    <div class="Profile">
+      <div class="Sidebar">
+        <i class="fas fa-book-medical fa-3x Sidebar-book"></i>
+        <div class="AccountButton">Logout</div>
+      </div>
+      <div class="CategoryColumn">
+        <div class="CategoryColumn-columnHeader">
+          <i class="far fa-plus-square fa-3x"></i>
+          <div class="CategoryColumn-columnHeaderTitle">Add Category</div>
+        </div>
+      </div>
+      <div class="SnippetColumn">
+        <div class="SnippetColumn-columnHeader">
+          <i class="far fa-plus-square fa-3x"></i>
+          <div class="SnippetColumn-columnHeaderTitle">Add Category</div>
+        </div>
+      </div>
+      <div class="EditorColumn">
+        <textarea class="EditorColumn-Editor"></textarea>
+      </div>
+    </div>
+
+  </div>
+
 
 
   <script src="src/components/app.js"></script>

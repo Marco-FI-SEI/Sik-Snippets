@@ -9,4 +9,9 @@ class SnippetCategories {
   fetchAndLoadNotes() {
     this.adapter.getSnippetCategories().then(snippetCategories => console.log(snippetCategories))
   }
+
+  renderSnippetCategories() {
+    const
+  }
+
 }
