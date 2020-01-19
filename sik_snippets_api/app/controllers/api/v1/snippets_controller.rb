@@ -1,7 +1,7 @@
 class Api::V1::SnippetsController < ApplicationController
   before_action :set_snippet_category
   before_action :set_snippet, only: [:show, :update, :destroy]
-  before_action :require_login
+  # before_action :require_login
 
 
   def index
@@ -38,6 +38,6 @@ class Api::V1::SnippetsController < ApplicationController
   end
 
   def snippet_params
-    params.require(@snippet).permit(:title, :body)
+    params.require(@snippet).permit(:title, :body, :snippet_category_id)
   end
 end
