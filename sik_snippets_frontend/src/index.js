@@ -7,7 +7,7 @@ const domElements = {
   page: document.querySelector('.Page'),
   modalClose: document.querySelector('.FormModal-close'),
   formModal: document.querySelector('.FormModal'),
-  lightSwitch: document.querySelector('.LightSwitch'),
+  // lightSwitch: document.querySelector('.LightSwitch'),
   blackout: document.querySelector('.Blackout'),
   nameField: document.querySelector('input[name="firstName"]'),
   nameRow: document.querySelector('.Form-name'),
@@ -17,11 +17,14 @@ const domElements = {
   passwordRow: document.querySelector('.Form-password'),
   passwordConfirmationField: document.querySelector('input[name="passwordConfirmation"]'),
   passwordConfirmationRow: document.querySelector('.Form-confirmation'),
-  formSubmit: document.querySelector('.Form-submitButton')
+  formSubmit: document.querySelector('.Form-submitButton'),
+  accountButton: document.querySelector('.AccountButton')
 }
 
 const togglePageLightMode = () => {
   domElements.page.classList.toggle('Light')
+  console.log(appState)
+
 }
 
 const updateAppState = (...stateItems) => {
@@ -69,7 +72,12 @@ const restoreForm = () => {
 }
 
 const buildFormData = (flag) => {
-  const { nameField, emailField, passwordField, passwordConfirmationField } = domElements
+  const {
+    nameField,
+    emailField,
+    passwordField,
+    passwordConfirmationField
+  } = domElements
 
   const formData = {
     first_name: nameField.value,
@@ -97,8 +105,7 @@ const buildConfigObject = (formData) => {
 }
 
 const enableUser = (flag, obj) => {
-  const credentialsObj = { withCredentials: true }
-  fetch(`${baseUrl}${flag}`, obj, credentialsObj)
+  fetch(`${baseUrl}${flag}`, obj, { credentials: 'include' })
     .then(response => response.json())
     .then(json => handleSession(json.data))
     .catch(error => console.log(error.message))
@@ -106,18 +113,36 @@ const enableUser = (flag, obj) => {
 
 const handleSession = (data) => {
   if (data.status === "created") {
-    updateAppState("isUserLoggedIn")
-    renderUserProfile()
+    // renderUserProfile()
+  } else if (data["logged_out"]) {
+    // resetPage()
   }
+  
+  updateAppState("isUserLoggedIn")
 }
 
 const renderUserProfile = () => {
-  
+
 }
 
-domElements.lightSwitch.addEventListener('click', () => {
-  togglePageLightMode()
-})
+const logUserOut = () => {
+  const configObject = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    }
+  }
+
+  fetch(`${baseUrl}logout`, configObject, { credentials: 'include' })
+    .then(response => response.json())
+    .then(json => handleSession(json))
+    .catch(error => console.log(error.message))
+}
+
+// domElements.lightSwitch.addEventListener('click', () => {
+//   togglePageLightMode()
+// })
 
 domElements.authButtons.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -144,3 +169,17 @@ domElements.formSubmit.addEventListener('click', (e) => {
   enableUser(flag, configObject)
   hideFormModal()
 })
+
+domElements.accountButton.addEventListener('click', () => {
+  logUserOut()
+  updateAppState("isUserLoggedIn")
+
+})
+
+// change ui on login
+// expose category column on book click / close all
+// fetch all snippet categories of user
+// list all snippet categories and associated snippets
+// render snippet content on snippet click
+// save snippet
+// logout
