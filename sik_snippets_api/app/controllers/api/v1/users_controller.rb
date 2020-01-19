@@ -1,19 +1,16 @@
 class Api::V1::UsersController < ApplicationController
 
   def create
-    @user = User.new(user_params)
+    @user = User.create!(
+      first_name: params[:first_name],
+      email: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation]
+    )
 
-    if @user.save!(user_params)
+    if @user
       session[:user_id] = @user.id
-      json_response(object = @user, status = :created)
-    else
-      render json: { status: 500 }
+      json_response(object: @user, status: :created)
     end
-  end
-
-  private
-
-  def user_params
-    params.require(:user).permit(:first_name, :email, :password, :password_confirmation)
   end
 end

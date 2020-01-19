@@ -7,13 +7,16 @@ const domElements = {
   page: document.querySelector('.Page'),
   modalClose: document.querySelector('.FormModal-close'),
   formModal: document.querySelector('.FormModal'),
-  signUpButton: document.querySelector('.Form-signUpButton'),
   lightSwitch: document.querySelector('.LightSwitch'),
   blackout: document.querySelector('.Blackout'),
-  nameField: document.getElementsByTagName('input[name="firstName"]'),
-  emailField: document.getElementsByTagName('input[name="email"]'),
-  passwordField: document.getElementsByTagName('input[name="password"]'),
-  passwordConfirmationField: document.getElementsByTagName('input[name="passwordConfirmation"]'),
+  nameField: document.querySelector('input[name="firstName"]'),
+  nameRow: document.querySelector('.Form-name'),
+  emailField: document.querySelector('input[name="email"]'),
+  emailRow: document.querySelector('.Form-email'),
+  passwordField: document.querySelector('input[name="password"]'),
+  passwordRow: document.querySelector('.Form-password'),
+  passwordConfirmationField: document.querySelector('input[name="passwordConfirmation"]'),
+  passwordConfirmationRow: document.querySelector('.Form-confirmation'),
   formSubmit: document.querySelector('.Form-submitButton')
 }
 
@@ -22,19 +25,34 @@ const togglePageLightMode = () => {
 }
 
 const displayFormModal = () => {
+  if (appState["isLoginSelected"]) {
+    const { nameRow, passwordConfirmationRow } = domElements
+
+    passwordConfirmationRow.parentNode.removeChild(passwordConfirmationRow)
+    nameRow.parentNode.removeChild(nameRow)
+  }
   domElements.formModal.classList.add('Visible')
+  domElements.formModal.classList.add('Login')
   domElements.blackout.style.display = 'block'
   updateAppState("isFormVisible")
+}
+
+const restoreForm = () => {
+  const { nameRow, emailRow, passwordRow, passwordConfirmationRow } = domElements
+
+  emailRow.insertAdjacentElement('beforebegin', nameRow)
+  passwordRow.insertAdjacentElement('afterend', passwordConfirmationRow)
 }
 
 const hideFormModal = () => {
   domElements.formModal.classList.remove('Visible')
   domElements.blackout.style.display = 'none'
 
-  if (appState["isLoginSelected"] == true) {
-    updateAppState(["isLoginSelected", "isFormVisible"])
+  if (appState["isLoginSelected"]) {
+    updateAppState("isLoginSelected", "isFormVisible")
+    restoreForm()
   } else {
-    updateAppState(["isSignupSelected", "isFormVisible"])
+    updateAppState("isSignupSelected", "isFormVisible")
   }
 }
 
@@ -45,13 +63,17 @@ const updateAppState = (...stateItems) => {
   console.log(appState)
 }
 
-const buildFormData = () => {
+const buildFormData = (flag) => {
+  const { nameField, emailField, passwordField, passwordConfirmationField } = domElements
+
   const formData = {
-    firstName: domElements.nameField.value,
-    email: domElements.emailField.value,
-    password: domElements.passwordField.value,
-    passwordConfirmation: domElements.passwordConfirmationField.value
+    first_name: nameField.value,
+    email: emailField.value,
+    password: passwordField.value,
+    password_confirmation: passwordConfirmationField.value
   }
+
+  if (flag === "sessions") delete formData.password_confirmation
 
   return formData
 }
@@ -70,7 +92,8 @@ const buildConfigObject = (formData) => {
 }
 
 const enableUser = (flag, obj) => {
-  fetch(`${baseUrl}${flag}`, obj)
+  const credentialsObj = { withCredentials: true }
+  fetch(`${baseUrl}${flag}`, obj, credentialsObj)
     .then(response => response.json())
     .then(json => console.log(json))
     .catch(error => console.log(error.message))
@@ -82,12 +105,12 @@ domElements.lightSwitch.addEventListener('click', () => {
 
 domElements.authButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    displayFormModal()
     if (btn.className.includes("login")) {
       updateAppState("isLoginSelected")
     } else {
       updateAppState("isSignupSelected")
     }
+    displayFormModal()
   })
 })
 
@@ -95,14 +118,13 @@ domElements.modalClose.addEventListener('click', () => {
   hideFormModal()
 })
 
-domElements.formSubmit.addEventListener('click', () => {
-  const formData = buildFormData()
-  const configObject = buildConfigObject(formData)
-  let flag
+domElements.formSubmit.addEventListener('click', (e) => {
+  e.preventDefault()
 
-  appState["isLoginSelected"] == true ? flag = "sessions" : flag = "users"
+  let flag = appState["isLoginSelected"] ? "sessions" : "users"
+  const formData = buildFormData(flag)
+  const configObject = buildConfigObject(formData)
 
   enableUser(flag, configObject)
   hideFormModal()
 })
-

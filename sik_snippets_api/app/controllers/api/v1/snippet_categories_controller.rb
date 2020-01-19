@@ -8,8 +8,10 @@ class Api::V1::SnippetCategoriesController < ApplicationController
   end
 
   def create
-    @snippet_category = SnippetCategory.create!(snippet_category_params)
-    json_response(object: @snippet_category, message: "Snippet Category saved!", status: :created)
+    @snippet_category = SnippetCategory.create!(title: params[:title])
+    if @snippet_category
+      json_response(object: @snippet_category, message: "Snippet Category saved!", status: :created)
+    end
   end
 
   def show

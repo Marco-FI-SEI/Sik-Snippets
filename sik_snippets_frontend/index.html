@@ -47,25 +47,25 @@
 
       <div class="FormModal">
         <i class="far fa-times-circle FormModal-close"></i>
-        <form method="POST" class="Form">
-          <div class="Form-row">
+        <form class="Form">
+          <div class="Form-row Form-name">
             <label for="firstName">First Name</label>
             <input class="Form--input" type="text" name="firstName" required>
           </div>
-          <div class="Form-row">
+          <div class="Form-row Form-email">
             <label for="email">Email</label>
             <input class="Form--input" type="email" name="email" required>
           </div>
-          <div class="Form-row">
+          <div class="Form-row Form-password">
             <label for="password">Password</label>
             <input class="Form--input" type="password" name="password" required>
           </div>
-          <div class="Form-row">
+          <div class="Form-row Form-confirmation">
             <label for="password_confirmation">Repeat Password</label>
-            <input class="Form-input" type="password_confirmation" name="password_confirmation" required>
+            <input class="Form-input" type="password" name="passwordConfirmation" required>
           </div>
           <div class="Form-row">
-            <button class="Form-submitButton Button">Submit</button>
+            <button type="button" class="Form-submitButton Button">Submit</button>
           </div>
         </form>
       </div>

@@ -9,7 +9,7 @@ class Api::V1::SnippetsController < ApplicationController
   end
 
   def create
-    @snippet_category.snippets.create!(snippet_params)
+    @snippet_category.snippets.create!(title: params[:title], body: params[:body])
     json_response(object: @snippet_category, message: "Snippet Category saved!", status: :created)
   end
 
