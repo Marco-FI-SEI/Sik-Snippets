@@ -2,7 +2,8 @@ class SnippetCategory {
   constructor(title, owner) {
     this.title = title
     this.owner = owner
-    SnippetCategory.instanceCount = (SnippetCategory.instanceCount || 0) + 1
+    this.instanceCount = (SnippetCategory.instanceCount || 0) + 1
+    this.render()
   }
 
   render() {
@@ -43,4 +44,3 @@ class SnippetCategory {
       .catch(error => console.log(error.message))
   }
 }
-

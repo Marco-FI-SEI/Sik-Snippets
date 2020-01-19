@@ -9,7 +9,8 @@ class App {
       isFormVisible: false,
       isUserLoggedIn: false,
       isLoginSelected: false,
-      isSignUpSelected: false
+      isSignUpSelected: false,
+      currentUserId: ""
     }
 
     return state

@@ -104,7 +104,7 @@ const buildConfigObject = (formData) => {
   return configObject
 }
 
-const enableUser = (flag, obj) => {
+const enableUserAccess = (flag, obj) => {
   fetch(`${baseUrl}${flag}`, obj, { credentials: 'include' })
     .then(response => response.json())
     .then(json => handleSession(json.data))
@@ -113,16 +113,21 @@ const enableUser = (flag, obj) => {
 
 const handleSession = (data) => {
   if (data.status === "created") {
+    createUser(data)
+    //setCurrentUserId()
     // renderUserProfile()
   } else if (data["logged_out"]) {
+    // destroyUser()
+    //resetCurrentUserId()
     // resetPage()
   }
-  
+
   updateAppState("isUserLoggedIn")
 }
 
-const renderUserProfile = () => {
-
+const createUser = (data) => {
+  console.log(data)
+  // const newUser = new User()
 }
 
 const logUserOut = () => {
@@ -166,14 +171,12 @@ domElements.formSubmit.addEventListener('click', (e) => {
   const formData = buildFormData(flag)
   const configObject = buildConfigObject(formData)
 
-  enableUser(flag, configObject)
+  enableUserAccess(flag, configObject)
   hideFormModal()
 })
 
 domElements.accountButton.addEventListener('click', () => {
   logUserOut()
-  updateAppState("isUserLoggedIn")
-
 })
 
 // change ui on login

@@ -108,6 +108,10 @@ i {
   color: var(--dark);
 }
 
+.Hide {
+  display: none;
+}
+
 /* .Page > * {
   border: 2px solid yellow;
 } */

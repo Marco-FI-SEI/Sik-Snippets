@@ -20,7 +20,7 @@
   <div class="Page">
     <div class="Blackout"></div>
     <!-- <div class="LightSwitch">💡</div> -->
-      <div class="AccountButton"><i class="fas fa-sign-out-alt fa-3x"></i></div>
+    <div class="AccountButton"><i class="fas fa-sign-out-alt fa-3x"></i></div>
 
     <div class="Header">
       <h1 class="Header-Text">Sik
@@ -34,76 +34,55 @@
         </span>nippets</h1>
     </div>
 
-    <div class="Info">
+    <div class="Container">
+      <div class="Info">
 
-      <ul>
+        <ul>
         <li class="Info-Item">Save that brainpower for novel complexities...</li>
         <li class="Info-Item">Never forget your best moments of inspiration...</li>
         <li class="Info-Item">Share any of your snippets complete with notes...</li>
       </ul>
 
-      <div class="ButtonBox">
-        <button type="button" class="ButtonBox-signUpButton ModalTrigger Button">Sign Up</button>
-        <button type="button" class="ButtonBox-loginButton ModalTrigger Button">Log In</button>
-      </div>
-
-      <div class="FormModal">
-        <i class="far fa-times-circle FormModal-close"></i>
-        <form class="Form">
-          <div class="Form-row Form-name">
-            <label for="firstName">First Name</label>
-            <input class="Form--input" type="text" name="firstName" required>
-          </div>
-          <div class="Form-row Form-email">
-            <label for="email">Email</label>
-            <input class="Form--input" type="email" name="email" required>
-          </div>
-          <div class="Form-row Form-password">
-            <label for="password">Password</label>
-            <input class="Form--input" type="password" name="password" required>
-          </div>
-          <div class="Form-row Form-confirmation">
-            <label for="password_confirmation">Repeat Password</label>
-            <input class="Form-input" type="password" name="passwordConfirmation" required>
-          </div>
-          <div class="Form-row">
-            <button type="button" class="Form-submitButton Button">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="Profile">
-      <div class="Sidebar">
-        <i class="fas fa-book-medical fa-3x Sidebar-book"></i>
-        <div class="AccountButton"><i class="fas fa-sign-out-alt fa-3x"></i></div>
-      </div>
-      <div class="CategoryColumn">
-        <div class="CategoryColumn-columnHeader">
-          <i class="far fa-plus-square fa-3x"></i>
-          <div class="CategoryColumn-columnHeaderTitle">Add Category</div>
+        <div class="ButtonBox">
+          <button type="button" class="ButtonBox-signUpButton ModalTrigger Button">Sign Up</button>
+          <button type="button" class="ButtonBox-loginButton ModalTrigger Button">Log In</button>
         </div>
-        <ul class="CategoryColumn-snippetCategoryList"></ul>
-      </div>
-      <div class="SnippetColumn">
-        <div class="SnippetColumn-columnHeader">
-          <i class="far fa-plus-square fa-3x"></i>
-          <div class="SnippetColumn-columnHeaderTitle">Add Category</div>
+
+        <div class="FormModal">
+          <i class="far fa-times-circle FormModal-close"></i>
+          <form class="Form">
+            <div class="Form-row Form-name">
+              <label for="firstName">First Name</label>
+              <input class="Form--input" type="text" name="firstName" required>
+            </div>
+            <div class="Form-row Form-email">
+              <label for="email">Email</label>
+              <input class="Form--input" type="email" name="email" required>
+            </div>
+            <div class="Form-row Form-password">
+              <label for="password">Password</label>
+              <input class="Form--input" type="password" name="password" required>
+            </div>
+            <div class="Form-row Form-confirmation">
+              <label for="password_confirmation">Repeat Password</label>
+              <input class="Form-input" type="password" name="passwordConfirmation" required>
+            </div>
+            <div class="Form-row">
+              <button type="button" class="Form-submitButton Button">Submit</button>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="EditorColumn">
-        <textarea class="EditorColumn-Editor"></textarea>
-      </div>
     </div>
-
   </div>
 
 
 
   <script src="src/components/app.js"></script>
-  <script src="src/adapters/SnippetCategoriesAdapter.js"></script>
   <script src="src/components/snippetCategories.js"></script>
   <script src="src/components/snippetCategory.js"></script>
+  <script src="src/components/user.js"></script>
+  <script src="src/adapters/userAdapter.js"></script>
   <script src="src/index.js"></script>
   <script src="src/views/form.js"></script>
 

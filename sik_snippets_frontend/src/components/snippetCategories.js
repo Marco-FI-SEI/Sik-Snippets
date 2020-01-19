@@ -1,16 +1,18 @@
-// class SnippetCategories {
-//   constructor() {
-//     this.snippetCategories = []
-//     // this.adapter = new SnippetCategories()
-//     // this.bindEventListeners()
-//     // this.fetchAndLoadNotes()
-//   }
+class SnippetCategories {
+  constructor() {
+    this.snippetCategories = []
+    this.adapter = new SnippetCategoriesAdapter()
+    this.fetchAndLoadSnippetCategories()
+  }
 
-//   fetchAndLoadNotes() {
-//     this.adapter.getSnippetCategories().then(snippetCategories => console.log(snippetCategories))
-//   }
-
-  // renderSnippetCategories() {
-  //   const
-  // }
-
+  fetchAndLoadSnippetCategories() {
+    this.adapter.getSnippetCategories()
+      .then(snippetCategories => {
+        snippetCategories.forEach(snippetCategory => {
+          this.snippetCategories.push(new SnippetCategory(snippetCategory))
+        })
+        .then(() => this.render())
+        .catch(error => console.log(error.message))
+      })
+  }
+}
