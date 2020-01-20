@@ -3,16 +3,18 @@ class SnippetCategory {
     this.id = id
     this.title = title
     this.owner = owner
+    this.adapter = new SnippetAdapter(id, owner)
     // SnippetCategory.instanceCount = (SnippetCategory.instanceCount || 0) + 1
-    this.render()
+    this.renderCategoryList()
   }
 
-  render() {
-    const snippetCategoryList = document.querySelector('.CategoryColumn-snippetCategoryList')
+  renderCategoryList() {
+    const snippetCategoryList = document.querySelector('.CategoryColumn-categoryList')
     const snippetCategoryListItem = document.createElement('li')
-    snippetCategoryListItem.classList.add('CategoryColumn-snippetCategoryListItem')
+    snippetCategoryListItem.classList.add('ListItem')
     snippetCategoryListItem.id = `sc-${this.id}`
     const listItemTitle = document.createElement('p')
+    listItemTitle.classList.add('CategoryListItemTitle')
     const listItemTitleText = document.createTextNode(`${this.title}`)
     listItemTitle.appendChild(listItemTitleText)
     snippetCategoryListItem.appendChild(listItemTitle)

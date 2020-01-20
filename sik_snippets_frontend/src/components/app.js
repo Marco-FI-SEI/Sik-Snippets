@@ -10,7 +10,8 @@ class App {
       isUserLoggedIn: false,
       isLoginSelected: false,
       isSignUpSelected: false,
-      currentUser: {}
+      currentUser: "",
+      selectedCategory: ""
     }
 
     return state

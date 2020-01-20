@@ -9,10 +9,10 @@ class SnippetCategoryAdapter {
              .catch(error => error.message)
   }
 
-  async createSnippetCategory(titleValue, ownerValue) {
+  async createSnippetCategory(title, owner) {
     const snippetCategoryData = {
-      title: titleValue,
-      owner: ownerValue
+      title: title,
+      owner: owner
     }
 
     const configObject = {
