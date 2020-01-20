@@ -117,7 +117,7 @@ i {
 } */
 
 /* -------------------------------------------------- */
-/* PROFILE*/
+/* PROFILE */
 /* -------------------------------------------------- */
 
 .Profile {
@@ -141,14 +141,45 @@ i {
   margin: 5px;
 }
 
+/* -------------------------------------------------- */
+/* COLUMNS */
+/* -------------------------------------------------- */
+
+.ColumnList li {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: right;
+  max-width: 15vw;
+  overflow: hidden;
+}
+
+.Delete {
+  margin-left: 10px;
+  color: red;
+}
+
+/* -------------------------------------------------- */
+/* Snippet Category */
+/* -------------------------------------------------- */
+
 .CategoryColumn {
   grid-area: category;
   overflow: auto;
   resize: horizontal;
   min-width: 20vw;
   max-width: 25vw;
-
 }
+
+.CategoryColumn-categoryInput {
+  display: inline;
+}
+
+.CategoryColumn p {
+  display: inline;
+}
+
 .SnippetColumn {
   grid-area: snippet;
   overflow: auto;

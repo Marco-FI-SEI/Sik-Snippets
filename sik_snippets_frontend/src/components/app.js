@@ -10,7 +10,7 @@ class App {
       isUserLoggedIn: false,
       isLoginSelected: false,
       isSignUpSelected: false,
-      currentUserId: ""
+      currentUser: {}
     }
 
     return state

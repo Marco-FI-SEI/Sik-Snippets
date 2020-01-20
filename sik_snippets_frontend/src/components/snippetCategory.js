@@ -1,45 +1,46 @@
 class SnippetCategory {
-  constructor(title, owner) {
+  constructor(id, title, owner) {
+    this.id = id
     this.title = title
     this.owner = owner
-    this.instanceCount = (SnippetCategory.instanceCount || 0) + 1
+    // SnippetCategory.instanceCount = (SnippetCategory.instanceCount || 0) + 1
     this.render()
   }
 
   render() {
-    const snippetCategoryList = document.querySelectorAll('.CategoryColumn-snippetCategoryList')
+    const snippetCategoryList = document.querySelector('.CategoryColumn-snippetCategoryList')
     const snippetCategoryListItem = document.createElement('li')
     snippetCategoryListItem.classList.add('CategoryColumn-snippetCategoryListItem')
-    snippetCategoryListItem.id = `${this.getInstanceCount}`
+    snippetCategoryListItem.id = `sc-${this.id}`
     const listItemTitle = document.createElement('p')
-    const listItemTitleText = `${this.title}`
+    const listItemTitleText = document.createTextNode(`${this.title}`)
     listItemTitle.appendChild(listItemTitleText)
     snippetCategoryListItem.appendChild(listItemTitle)
     const deleteIcon = document.createElement('i')
-    deleteIcon.id = `${this.getInstanceCount}`
-    deleteIcon.classList.add('far fa-trash-alt Delete')
+    deleteIcon.id = `${this.id}`
+    deleteIcon.classList.add('far')
+    deleteIcon.classList.add('fa-trash-alt')
+    deleteIcon.classList.add('Delete')
     snippetCategoryListItem.appendChild(deleteIcon)
     snippetCategoryList.appendChild(snippetCategoryListItem)
 
-    snippetCategoryListItem.addEventListener('click', (e) => {
-      if (e.target.className === 'delete') this.delete(e)
+    deleteIcon.addEventListener('click', e => {
+      this.delete(e)
     })
   }
 
   delete(e) {
     const categoryId = e.target.id
+    console.log(categoryId)
 
     const configObject = {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
       }
     }
 
-    fetch(`http://localhost:3000/api/v1/snippet_categories/${categoryId}`, configObject)
-      .then(response => response.json())
-      .then(json => console.log(json))
+    fetch(`${app.baseUrl}users/${this.owner}/snippet_categories/${categoryId}`, configObject)
       .then(() => e.target.parentElement.remove())
       .catch(error => console.log(error.message))
   }
