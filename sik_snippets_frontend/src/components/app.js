@@ -10,6 +10,8 @@ class App {
       isUserLoggedIn: false,
       isLoginSelected: false,
       isSignUpSelected: false,
+      isCategoryColumnVisible: false,
+      isSnippetColumnVisible: false,
       currentUser: "",
       selectedCategory: ""
     }

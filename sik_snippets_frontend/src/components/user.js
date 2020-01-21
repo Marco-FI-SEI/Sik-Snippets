@@ -17,31 +17,32 @@ class User {
     const activeViewHtml = `
       <div class="Profile">
         <div class="Sidebar">
-          <i class="fas fa-book-medical fa-3x Sidebar-book"></i>
-          <div class="AccountButton"><i class="fas fa-sign-out-alt fa-3x"></i></div>
+          <i class="fas fa-book-medical fa-3x Sidebar-book Button"></i>
         </div>
-        <div class="CategoryColumn Column">
-          <div class="CategoryColumn-columnHeader">
-            <i class="far fa-plus-square fa-3x Add AddCategory"></i>
-            <input type="text class="CategoryColumn-categoryInput" placeholder="Add Category">
+        <div class="CategoryColumn Column Hide">
+          <div class="CategoryColumn-columnHeader ColumnHeader">
+            <i class="far fa-plus-square fa-3x Add AddCategory Button"></i>
+            <input class="ColumnInput" type="text class="CategoryColumn-categoryInput" placeholder="Add Category">
           </div>
           <ul class="CategoryColumn-categoryList List"></ul>
         </div>
-        <div class="SnippetColumn Column">
-          <div class="SnippetColumn-columnHeader">
-            <i class="far fa-plus-square fa-3x Add AddSnippet"></i>
-            <input type="text class="SnippetColumn-snippetInput" placeholder="Add Snippet">
+        <div class="SnippetColumn Column Hide">
+          <div class="SnippetColumn-columnHeader ColumnHeader">
+            <i class="far fa-plus-square fa-3x Add AddSnippet Button"></i>
+            <input class="ColumnInput" type="text class="SnippetColumn-snippetInput" placeholder="Add Snippet">
           </div>
           <ul class="SnippetColumn-snippetList List"></ul>
         </div>
         <div class="EditorColumn">
-          <textarea class="EditorColumn-Editor"></textarea>
+          <h2 class="EditorColumn-header"></h2>
+          <div class="EditorColumn-Editor">
+            <textarea class="EditorColumn-editorArea"></textarea>
+          </div>
         </div>
       </div>
     `
 
     viewContainer.insertAdjacentHTML('afterbegin', activeViewHtml)
-
   }
 
   fetchAndLoadSnippetCategories() {
@@ -85,6 +86,19 @@ class User {
   initAndBindEventListeners() {
     const addButtons = document.querySelectorAll('.Add')
     const lists = document.querySelectorAll('.List')
+    const accountButton = document.querySelector('.AccountButton')
+    const snippetBook = document.querySelector('.Sidebar-book')
+
+    accountButton.classList.remove('Hide')
+
+    snippetBook.addEventListener('click', () => {
+      this.toggleColumnDisplay()
+    })
+
+    accountButton.addEventListener('click', () => {
+      logUserOut()
+      accountButton.classList.add('Hide')
+    })
 
     addButtons.forEach(btn => {
       btn.addEventListener('click', e => {
@@ -102,10 +116,12 @@ class User {
 
         if (e.target.className.includes('CategoryListItemTitle')) {
           this.fetchAndLoadSnippets(id)
+          this.toggleColumnDisplay()
           appState["selectedCategory"] = id
         }
         else {
           this.renderSnippetBody(id)
+          this.toggleColumnDisplay()
           appState["selectedSnippet"] = id
         }
       })
@@ -146,12 +162,30 @@ class User {
 
   renderSnippetBody(id) {
     const snippetCategory = appState["selectedCategory"]
-    const editor = document.querySelector('.EditorColumn-Editor')
+    const editor = document.querySelector('.EditorColumn-editorArea')
     const snippetAdapter = new SnippetAdapter(snippetCategory, this.userId)
     snippetAdapter.getSnippetBody(id).then(snippetData => {
       const body = snippetData.data.object.body
       editor.insertAdjacentHTML("afterbegin", body)
     })
+  }
+
+  toggleColumnDisplay() {
+    const categoryColumn = document.querySelector('.CategoryColumn')
+    const snippetColumn = document.querySelector('.snippetColumn')
+
+    if (appState["isCategoryColumnVisible"] === false) {
+      categoryColumn.classList.remove('Hide')
+      appState["isCategoryColumnVisible"] = true
+    } else if (appState["isCategoryColumnVisible"] === true && appState["isSnippetColumnVisible"] === false) {
+      categoryColumn.classList.add('Hide')
+      appState["isCategoryColumnVisible"] = false
+    } else if (appState["isCategoryColumnVisible"] === true && appState["isSnippetColumnVisible"] === true) {
+      categoryColumn.classList.add('Hide')
+      snippetColumn.classList.add('Hide')
+      appState["isCategoryColumnVisible"] = false
+      appState["isSnippetColumnVisible"] = false
+    }
   }
 }
 

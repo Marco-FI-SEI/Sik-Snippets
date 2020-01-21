@@ -24,10 +24,6 @@ html {
   padding: 0;
 }
 
-i {
-  margin: 5px;
-}
-
 /* -------------------------------------------------- */
 /* BUTTONS */
 /* -------------------------------------------------- */
@@ -37,7 +33,7 @@ i {
   text-align: right;
 }
 
-.Button {
+.Primary {
   font-size: 1.5rem;
   font-weight: lighter;
   padding: 0.5rem;
@@ -65,17 +61,13 @@ i {
   transition: ease-in 0.2s;
 }
 
-.LightSwitch {
-  font-size: 5rem;
+.AccountButton {
+  font-size: 1.5rem;
   height: 100px;
   width: 85px;
   position: absolute;
-  right: 50px;
+  right: 40px;
   top: 50px;
-}
-
-.LightSwitch:hover {
-  cursor: pointer;
 }
 
 
@@ -120,33 +112,39 @@ i {
 /* PROFILE */
 /* -------------------------------------------------- */
 
+.Container {
+  height: 83.5%;
+  width: 100%;
+}
+
 .Profile {
-  height: 80vh;
+  height: 100%;
   width: 100%;
   display: grid;
   margin-top: 50px;
   grid-template-areas: "sidebar category snippet editor";
-  grid-template-columns: 0.1fr 0.5fr 0.5fr 1.75fr;
+  grid-template-columns: 0.2fr 0.5fr 0.5fr 1.75fr;
 }
 
-.Profile > * {
+.Profile, .Profile > * {
   border: 2px solid yellow;
-}
-
-.Sidebar {
-  grid-area: sidebar;
-}
-
-.Sidebar-book {
-  margin: 5px;
 }
 
 /* -------------------------------------------------- */
 /* COLUMNS */
 /* -------------------------------------------------- */
 
+.Sidebar {
+  grid-area: sidebar;
+}
+
+.Sidebar-book {
+  margin: 20px;
+}
+
 .List {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .List li {
@@ -155,9 +153,8 @@ i {
   padding: 5px;
   margin: 5px;
   text-align: right;
-  max-width: 15vw;
+  max-width: 75%;
   overflow: hidden;
-  width: 100%;
 }
 
 .Delete {
@@ -166,11 +163,26 @@ i {
 }
 
 .ListItem p, .Column input {
-  display: inline;
+  display: inline-block;
+  line-height: 50px;
 }
 
-.Column input {
+.ColumnHeader {
+  margin: 30px;
+}
+
+.ColumnHeader i {
+  vertical-align: middle;
+}
+
+.ColumnInput {
   font-size: 1rem;
+  height: 41px;
+  padding-top: 14px;
+  padding-bottom: 17px;
+  padding-left: 5px;
+  border-radius: 5px;
+  border: none;
 }
 
 /* -------------------------------------------------- */
@@ -181,11 +193,8 @@ i {
   grid-area: category;
   overflow: auto;
   resize: horizontal;
-  min-width: 20vw;
-  max-width: 25vw;
-}
-
-.CategoryColumn-categoryInput {
+  min-width: 25vw;
+  max-width: 30vw;
 }
 
 .CategoryColumn p {
@@ -196,38 +205,43 @@ i {
   grid-area: snippet;
   overflow: auto;
   resize: horizontal;
-  min-width: 20vw;
-  max-width: 25vw;
+  min-width: 25vw;
+  max-width: 30vw;
 }
+
 .EditorColumn {
   grid-area: editor;
-
-
+  background-color: black;
 }
 
 .EditorColumn-Editor {
-  height: 100%;
-  width: 100%;
+  display: block;
+  height: 97.4%;
+  width: 93%;
 }
 
+.EditorColumn-header {
+  text-align: center;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.EditorColumn-editorArea {
+  width: 100%;
+  height: 97%;
+  border: none;
+  color: white;
+  font-family:Consolas,
+  Monaco,
+  Lucida Console,
+  Liberation Mono,
+  DejaVu Sans Mono,
+  Bitstream Vera Sans Mono,
+  Courier New;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin: 20px;
+  resize: none;
+  background-color: black;
+}
 
 /* -------------------------------------------------- */
 /* TITLE */
@@ -298,7 +312,11 @@ i {
   padding-bottom: 50px;
 }
 
-.Info-item {
+.Info-list {
+  list-style: none;
+}
+
+.Info-listItem {
   margin: 20px;
   list-style: none;
   letter-spacing: 2px;
@@ -313,6 +331,14 @@ i {
   border-radius: 5px;
   margin: 10px;
   display: none;
+  top: 0%;
+  right: 20%;
+}
+
+.FormModal-close {
+  padding: 10px;
+  position: absolute;
+  right: 0;
 }
 
 .FormModal-close:hover {
@@ -321,13 +347,13 @@ i {
 
 .Visible {
   position: absolute;
-
   display: block;
   z-index: 1010;
 }
 
-/* .FormModal i {
-} */
+.Form {
+  margin-top: 80px;
+}
 
 .Form-row {
   margin: 40px;
@@ -338,7 +364,7 @@ i {
 }
 
 .Form-input {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .Form-submitButton:hover {

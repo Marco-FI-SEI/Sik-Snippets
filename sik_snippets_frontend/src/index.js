@@ -27,13 +27,11 @@ const domElements = {
   passwordConfirmationField: document.querySelector('input[name="passwordConfirmation"]'),
   passwordConfirmationRow: document.querySelector('.Form-confirmation'),
   formSubmit: document.querySelector('.Form-submitButton'),
-  accountButton: document.querySelector('.AccountButton')
 }
 
 const togglePageLightMode = () => {
   domElements.page.classList.toggle('Light')
   console.log(appState)
-
 }
 
 const updateAppState = (...stateItems) => {
@@ -186,9 +184,9 @@ const destroyUser = () => {
 /* EVENT LISTENERS */
 /* -------------------------------------------------- */
 
-domElements.lightSwitch.addEventListener('click', () => {
-  togglePageLightMode()
-})
+// domElements.lightSwitch.addEventListener('click', () => {
+//   togglePageLightMode()
+// })
 
 domElements.authButtons.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -216,9 +214,7 @@ domElements.formSubmit.addEventListener('click', e => {
   hideFormModal()
 })
 
-domElements.accountButton.addEventListener('click', () => {
-  logUserOut()
-})
+
 
 
 

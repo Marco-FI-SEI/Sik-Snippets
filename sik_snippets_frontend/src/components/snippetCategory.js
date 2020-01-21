@@ -9,6 +9,7 @@ class SnippetCategory {
   }
 
   renderCategoryList() {
+    const snippetList = document.querySelector('.SnippetColumn-snippetList')
     const snippetCategoryList = document.querySelector('.CategoryColumn-categoryList')
     const snippetCategoryListItem = document.createElement('li')
     snippetCategoryListItem.classList.add('ListItem')
@@ -22,13 +23,26 @@ class SnippetCategory {
     deleteIcon.id = `${this.id}`
     deleteIcon.classList.add('far')
     deleteIcon.classList.add('fa-trash-alt')
+    deleteIcon.classList.add('Button')
     deleteIcon.classList.add('Delete')
     snippetCategoryListItem.appendChild(deleteIcon)
     snippetCategoryList.appendChild(snippetCategoryListItem)
 
+    snippetCategoryListItem.addEventListener('click', () => {
+      this.clearList(snippetList)
+    })
+
     deleteIcon.addEventListener('click', e => {
       this.delete(e)
     })
+  }
+
+  clearList(element) {
+    console.log("test")
+    while (element.firstChild) {
+      console.log("test2")
+      element.firstChild.remove()
+    }
   }
 
   delete(e) {

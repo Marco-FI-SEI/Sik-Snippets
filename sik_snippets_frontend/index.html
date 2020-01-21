@@ -19,8 +19,7 @@
 <body>
   <div class="Page">
     <div class="Blackout"></div>
-    <div class="LightSwitch">💡</div>
-    <div class="AccountButton"><i class="fas fa-sign-out-alt fa-3x"></i></div>
+    <div class="AccountButton Button Hide"><i class="fas fa-sign-out-alt fa-3x"></i></div>
 
     <div class="Header">
       <h1 class="Header-Text">Sik
@@ -37,15 +36,15 @@
     <div class="Container">
       <div class="Info">
 
-        <ul>
-        <li class="Info-Item">Save that brainpower for novel complexities...</li>
-        <li class="Info-Item">Never forget your best moments of inspiration...</li>
-        <li class="Info-Item">Share any of your snippets complete with notes...</li>
+        <ul class="Info-list">
+        <li class="Info-listItem">Save that brainpower for novel complexities...</li>
+        <li class="Info-listItem">Never forget your best moments of inspiration...</li>
+        <li class="Info-listItem">Share any of your snippets complete with notes...</li>
       </ul>
 
         <div class="ButtonBox">
-          <button type="button" class="ButtonBox-signUpButton ModalTrigger Button">Sign Up</button>
-          <button type="button" class="ButtonBox-loginButton ModalTrigger Button">Log In</button>
+          <button type="button" class="ButtonBox-signUpButton ModalTrigger Button Primary">Sign Up</button>
+          <button type="button" class="ButtonBox-loginButton ModalTrigger Button Primary">Log In</button>
         </div>
 
         <div class="FormModal">
@@ -53,22 +52,22 @@
           <form class="Form">
             <div class="Form-row Form-name">
               <label for="firstName">First Name</label>
-              <input class="Form--input" type="text" name="firstName" required>
+              <input class="Form-input" type="text" name="firstName" required>
             </div>
             <div class="Form-row Form-email">
               <label for="email">Email</label>
-              <input class="Form--input" type="email" name="email" required>
+              <input class="Form-input" type="email" name="email" required>
             </div>
             <div class="Form-row Form-password">
               <label for="password">Password</label>
-              <input class="Form--input" type="password" name="password" required>
+              <input class="Form-input" type="password" name="password" required>
             </div>
             <div class="Form-row Form-confirmation">
               <label for="password_confirmation">Repeat Password</label>
               <input class="Form-input" type="password" name="passwordConfirmation" required>
             </div>
             <div class="Form-row">
-              <button type="button" class="Form-submitButton Button">Submit</button>
+              <button type="button" class="Form-submitButton Button Primary">Submit</button>
             </div>
           </form>
         </div>

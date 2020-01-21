@@ -8,6 +8,10 @@ class Snippet {
   }
 
   renderSnippetList() {
+    const editorBody = document.querySelector('.EditorColumn-Editor')
+
+    this.clearList(editorBody)
+
     const snippetList = document.querySelector('.SnippetColumn-snippetList')
     const snippetListItem = document.createElement('li')
     snippetListItem.classList.add('ListItem')
@@ -24,9 +28,19 @@ class Snippet {
     snippetListItem.appendChild(deleteIcon)
     snippetList.appendChild(snippetListItem)
 
+    snippetList.addEventListener('click', () => {
+      this.clearList(editorBody)
+    })
+
     deleteIcon.addEventListener('click', e => {
       this.delete(e)
     })
+  }
+
+  clearList(element) {
+    while (element.firstChild) {
+      element.firstChild.remove()
+    }
   }
 
   delete(e) {
