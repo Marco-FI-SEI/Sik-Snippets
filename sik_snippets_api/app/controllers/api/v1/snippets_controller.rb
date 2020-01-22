@@ -1,8 +1,6 @@
 class Api::V1::SnippetsController < ApplicationController
   before_action :set_snippet_category
   before_action :set_snippet, only: [:show, :update, :destroy]
-  # before_action :require_login
-
 
   def index
     json_response(object: @snippet_category.snippets)

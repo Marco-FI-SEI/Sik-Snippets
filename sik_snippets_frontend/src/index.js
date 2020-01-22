@@ -196,15 +196,3 @@ domElements.formSubmit.addEventListener('click', e => {
   enableUserAccess(flag, configObject)
   hideFormModal()
 })
-
-
-
-
-
-// change ui on login
-// expose category column on book click / close all
-// fetch all snippet categories of user
-// list all snippet categories and associated snippets
-// render snippet content on snippet click
-// save snippet
-// logout

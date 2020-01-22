@@ -60,7 +60,11 @@ class SnippetCategory {
     }
 
     fetch(`${app.baseUrl}users/${this.owner}/snippet_categories/${categoryId}`, configObject)
-      .then(() => e.target.parentElement.remove())
+      .then(() => {
+        const snippetList = document.querySelector('.SnippetColumn-snippetList')
+        this.clearList(snippetList)
+        e.target.parentElement.remove()
+      })
       .catch(error => console.log(error.message))
   }
 }

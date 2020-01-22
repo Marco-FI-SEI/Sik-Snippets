@@ -79,10 +79,7 @@ class Snippet {
         this.clearList(snippetCategoryList)
         this.clearEditor()
 
-        const categoryId = appState["selectedCategory"]["categoryId"]
-        appState["currentUser"].fetchAndLoadSnippetCategories(categoryId)
         appState["currentUser"].toggleColumnDisplay()
-        // appState["currentUser"].fetchAndLoadSnippets(categoryId)
       })
       .catch(error => console.log(error.message))
   }

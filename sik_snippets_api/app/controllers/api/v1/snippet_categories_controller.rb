@@ -1,6 +1,5 @@
 class Api::V1::SnippetCategoriesController < ApplicationController
   before_action :set_snippet_category, only: [:show, :update, :destroy]
-  # before_action :require_login
 
   def index
     @snippet_categories = SnippetCategory.where(:owner => params[:user_id])
