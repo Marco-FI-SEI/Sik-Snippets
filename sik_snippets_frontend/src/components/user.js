@@ -21,15 +21,15 @@ class User {
         </div>
         <div class="CategoryColumn Column Hide">
           <div class="CategoryColumn-columnHeader ColumnHeader">
-            <i class="far fa-plus-square fa-3x Add AddCategory Button"></i>
             <input class="ColumnInput" type="text class="CategoryColumn-categoryInput" placeholder="Add Category">
+            <i class="far fa-plus-square fa-3x Add AddCategory Button"></i>
           </div>
           <ul class="CategoryColumn-categoryList List"></ul>
         </div>
         <div class="SnippetColumn Column Hide">
           <div class="SnippetColumn-columnHeader ColumnHeader">
-            <i class="far fa-plus-square fa-3x Add AddSnippet Button"></i>
             <input class="ColumnInput" type="text class="SnippetColumn-snippetInput" placeholder="Add Snippet">
+            <i class="far fa-plus-square fa-3x Add AddSnippet Button"></i>
           </div>
           <ul class="SnippetColumn-snippetList List"></ul>
         </div>
@@ -37,7 +37,7 @@ class User {
           <h2 class="EditorColumn-header"></h2>
           <div class="EditorColumn-Editor">
             <textarea class="EditorColumn-editorArea"></textarea>
-            <button type="submit" class="EditorColumn-save Button">Save</button>
+            <button type="submit" class="EditorColumn-save Button Primary">Save</button>
           </div>
         </div>
       </div>
@@ -121,8 +121,8 @@ class User {
           this.clearList(snippetList)
           this.fetchAndLoadSnippets(id)
           this.toggleColumnDisplay("category")
-          appState["selectedCategory"]["categoryId"] = id
-          appState["selectedCategory"]["categoryTitle"] = e.target.parentNode.textContent
+
+          this.displaySelected("category", e)
         } else {
           if (!e.target.className.includes("Delete")) {
             this.renderSnippetBody(id)
@@ -133,6 +133,46 @@ class User {
         this.clearEditor()
       })
     })
+  }
+
+  displaySelected(item, e) {
+    const id = e.target.parentNode.id.split("-")[1]
+    // const snippetList = document.querySelector('.SnippetColumn-snippetList')
+    const categoryList = document.querySelector('.CategoryColumn-categoryList')
+    const element = document.getElementById(`sc-${id}`)
+
+    if (item === "category") {
+      // check if selection exists
+      if (Object.keys(appState["selectedCategory"]).length > 0) {
+        // check if selection is the same
+        if (appState["selectedCategory"]["categoryId"] === id) {
+          // selection exists and is the same
+          element.classList.toggle('Selected')
+          appState["selectedCategory"] = {}
+        } else {
+          // selection exists and is not the same
+          const previousSelection = categoryList.querySelector('.Selected')
+          previousSelection.classList.remove('Selected')
+          element.classList.add('Selected')
+          appState["selectedCategory"]["categoryId"] = id
+          appState["selectedCategory"]["categoryTitle"] = e.target.parentNode.textContent
+        }
+      } else {
+        // selection does not exist
+        element.classList.add('Selected')
+        appState["selectedCategory"]["categoryId"] = id
+        appState["selectedCategory"]["categoryTitle"] = e.target.parentNode.textContent
+      }
+    }
+    // else if (item === "snippet") {
+    //   if (!appState["selectedSnippet"]["snippetId"] === id) {
+    //     const newSelection = snippetList.querySelector('.Selected')
+    //     newSelection.classList.remove('Selected')
+    //   } else {
+    //     element.classList.toggle('Selected')
+    //   }
+    // }
+
   }
 
   clearList(element) {
@@ -223,7 +263,9 @@ class User {
       .then(json => handleSession(json))
       .catch(error => console.log(error.message))
 
-      appState = {...app.state}
+    appState = {
+      ...app.state
+    }
   }
 
   clearEditor() {

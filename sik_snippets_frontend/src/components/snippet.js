@@ -80,7 +80,7 @@ class Snippet {
 
         const categoryId = appState["selectedCategory"]["categoryId"]
         appState["currentUser"].fetchAndLoadSnippetCategories(categoryId)
-        // appState["currentUser"].fetchAndLoadSnippets(categoryId)
+        appState["currentUser"].fetchAndLoadSnippets(categoryId)
       })
       .catch(error => console.log(error.message))
   }

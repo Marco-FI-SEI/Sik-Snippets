@@ -28,8 +28,6 @@ class SnippetCategory {
     snippetCategoryListItem.appendChild(deleteIcon)
     snippetCategoryList.appendChild(snippetCategoryListItem)
 
-    // const deleteCategory = document.querySelector('.CategoryDelete')
-
     snippetCategoryListItem.addEventListener('click', () => {
       this.clearEditor()
     })

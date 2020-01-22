@@ -70,6 +70,12 @@ html {
   top: 50px;
 }
 
+.EditorColumn-save {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
 
 /* -------------------------------------------------- */
 /* PAGE */
@@ -147,7 +153,7 @@ html {
   margin-bottom: 20px;
 }
 
-.List li {
+.ListItem {
   color: white;
   border-bottom: 1px dotted #F1FF7E;
   padding: 5px;
@@ -155,6 +161,10 @@ html {
   text-align: right;
   max-width: 75%;
   overflow: hidden;
+}
+
+.Selected {
+  border-bottom: 5px solid red;
 }
 
 .Delete {
@@ -165,6 +175,7 @@ html {
 .ListItem p, .Column input {
   display: inline-block;
   line-height: 50px;
+  text-align: left;
 }
 
 .ColumnHeader {
