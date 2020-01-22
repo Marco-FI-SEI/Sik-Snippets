@@ -15,6 +15,7 @@ class Snippet {
     snippetListItem.classList.add('ListItem')
     snippetListItem.id = `s-${this.id}`
     const listItemTitle = document.createElement('p')
+    listItemTitle.classList.add('SnippetListItemTitle')
     const listItemTitleText = document.createTextNode(`${this.title}`)
     listItemTitle.appendChild(listItemTitleText)
     snippetListItem.appendChild(listItemTitle)
@@ -80,7 +81,8 @@ class Snippet {
 
         const categoryId = appState["selectedCategory"]["categoryId"]
         appState["currentUser"].fetchAndLoadSnippetCategories(categoryId)
-        appState["currentUser"].fetchAndLoadSnippets(categoryId)
+        appState["currentUser"].toggleColumnDisplay()
+        // appState["currentUser"].fetchAndLoadSnippets(categoryId)
       })
       .catch(error => console.log(error.message))
   }
