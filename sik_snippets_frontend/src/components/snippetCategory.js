@@ -9,7 +9,6 @@ class SnippetCategory {
   }
 
   renderCategoryList() {
-    const snippetList = document.querySelector('.SnippetColumn-snippetList')
     const snippetCategoryList = document.querySelector('.CategoryColumn-categoryList')
     const snippetCategoryListItem = document.createElement('li')
     snippetCategoryListItem.classList.add('ListItem')
@@ -24,30 +23,36 @@ class SnippetCategory {
     deleteIcon.classList.add('far')
     deleteIcon.classList.add('fa-trash-alt')
     deleteIcon.classList.add('Button')
+    deleteIcon.classList.add('CategoryDelete')
     deleteIcon.classList.add('Delete')
     snippetCategoryListItem.appendChild(deleteIcon)
     snippetCategoryList.appendChild(snippetCategoryListItem)
 
+    // const deleteCategory = document.querySelector('.CategoryDelete')
+
     snippetCategoryListItem.addEventListener('click', () => {
-      this.clearList(snippetList)
+      this.clearEditor()
     })
 
     deleteIcon.addEventListener('click', e => {
       this.delete(e)
+      this.clearEditor()
     })
   }
 
   clearList(element) {
-    console.log("test")
     while (element.firstChild) {
-      console.log("test2")
       element.firstChild.remove()
     }
   }
 
+  clearEditor() {
+    const editor = document.querySelector('.EditorColumn-editorArea')
+    editor.textContent = ""
+  }
+
   delete(e) {
     const categoryId = e.target.id
-    console.log(categoryId)
 
     const configObject = {
       method: "DELETE",

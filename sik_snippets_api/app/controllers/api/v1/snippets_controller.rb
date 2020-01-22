@@ -18,7 +18,7 @@ class Api::V1::SnippetsController < ApplicationController
   end
 
   def update
-    @snippet.update(snippet_params)
+    @snippet.update(title: params["title"], body: params["body"], snippet_category_id: params["snippet_category_id"])
     head :no_content
   end
 
@@ -38,6 +38,6 @@ class Api::V1::SnippetsController < ApplicationController
   end
 
   def snippet_params
-    params.require(@snippet).permit(:title, :body, :snippet_category_id)
+    params.permit(:title, :body, :snippet_category_id)
   end
 end

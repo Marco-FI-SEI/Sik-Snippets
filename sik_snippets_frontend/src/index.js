@@ -3,7 +3,7 @@
 /* -------------------------------------------------- */
 
 const app = new App()
-const appState = app.state
+let appState = {...app.state}
 const baseUrl = app.baseUrl
 
 /* -------------------------------------------------- */
@@ -88,7 +88,7 @@ const resetPage = () => {
 }
 
 /* -------------------------------------------------- */
-/* USER */
+/* USER RELATED */
 /* -------------------------------------------------- */
 
 const buildFormData = (flag) => {
@@ -159,24 +159,7 @@ const setCurrentUser = (user) => {
   appState["currentUser"] = user
 }
 
-const logUserOut = () => {
-  const configObject = {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    }
-  }
-
-  fetch(`${baseUrl}logout`, configObject, {
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(json => handleSession(json))
-    .catch(error => console.log(error.message))
-}
-
-const destroyUser = () => {
+destroyUser = () => {
   appState["currentUser"] = {}
 }
 

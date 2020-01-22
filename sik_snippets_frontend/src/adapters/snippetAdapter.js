@@ -1,7 +1,7 @@
 class SnippetAdapter {
   constructor(snippetCategoryId, userId) {
-    this.snippetCategoryId = snippetCategoryId,
-      this.userId = userId
+    this.snippetCategoryId = snippetCategoryId
+    this.userId = userId
   }
 
   async getSnippets() {

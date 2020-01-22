@@ -37,6 +37,7 @@ class User {
           <h2 class="EditorColumn-header"></h2>
           <div class="EditorColumn-Editor">
             <textarea class="EditorColumn-editorArea"></textarea>
+            <button type="submit" class="EditorColumn-save Button">Save</button>
           </div>
         </div>
       </div>
@@ -93,10 +94,11 @@ class User {
 
     snippetBook.addEventListener('click', () => {
       this.toggleColumnDisplay()
+      this.clearEditor()
     })
 
     accountButton.addEventListener('click', () => {
-      logUserOut()
+      this.logUserOut()
       accountButton.classList.add('Hide')
     })
 
@@ -105,7 +107,7 @@ class User {
         if (e.target.className.includes('Category')) {
           this.addSnippetCategory(e)
         } else {
-            this.addSnippet(e)
+          this.addSnippet(e)
         }
       })
     })
@@ -115,23 +117,34 @@ class User {
         const id = e.target.parentNode.id.split("-")[1]
 
         if (e.target.className.includes('CategoryListItemTitle')) {
+          const snippetList = document.querySelector('.SnippetColumn-snippetList')
+          this.clearList(snippetList)
           this.fetchAndLoadSnippets(id)
-          this.toggleColumnDisplay()
-          appState["selectedCategory"] = id
+          this.toggleColumnDisplay("category")
+          appState["selectedCategory"]["categoryId"] = id
+          appState["selectedCategory"]["categoryTitle"] = e.target.parentNode.textContent
+        } else {
+          if (!e.target.className.includes("Delete")) {
+            this.renderSnippetBody(id)
+            appState["selectedSnippet"]["snippetId"] = id
+            appState["selectedSnippet"]["snippetTitle"] = e.target.parentNode.textContent
+          }
         }
-        else {
-          this.renderSnippetBody(id)
-          this.toggleColumnDisplay()
-          appState["selectedSnippet"] = id
-        }
+        this.clearEditor()
       })
     })
+  }
+
+  clearList(element) {
+    while (element.firstChild) {
+      element.firstChild.remove()
+    }
   }
 
   addSnippetCategory(e) {
     const title = e.target.nextElementSibling.value
     const owner = appState["currentUser"]["userId"]
-      this.categoryAdapter.createSnippetCategory(title, owner).then(snippetCategoryData => {
+    this.categoryAdapter.createSnippetCategory(title, owner).then(snippetCategoryData => {
         const {
           id,
           title,
@@ -140,11 +153,11 @@ class User {
         new SnippetCategory(id, title, owner)
       })
       .catch(error => error.message)
-      e.target.nextElementSibling.value = ""
+    e.target.nextElementSibling.value = ""
   }
 
   addSnippet(e) {
-    const snippetCategory = appState["selectedCategory"]
+    const snippetCategory = appState["selectedCategory"]["categoryId"]
     const snippetAdapter = new SnippetAdapter(snippetCategory, this.userId)
     const snippetTitle = e.target.nextElementSibling.value
     snippetAdapter.createSnippet(snippetTitle).then(snippetData => {
@@ -157,35 +170,65 @@ class User {
         new Snippet(id, title, body, snippet_category_id)
       })
       .catch(error => error.message)
-      e.target.nextElementSibling.value = ""
+    e.target.nextElementSibling.value = ""
   }
 
   renderSnippetBody(id) {
-    const snippetCategory = appState["selectedCategory"]
+    const snippetCategory = appState["selectedCategory"]["categoryId"]
     const editor = document.querySelector('.EditorColumn-editorArea')
     const snippetAdapter = new SnippetAdapter(snippetCategory, this.userId)
+
     snippetAdapter.getSnippetBody(id).then(snippetData => {
       const body = snippetData.data.object.body
-      editor.insertAdjacentHTML("afterbegin", body)
+      editor.value = body
     })
   }
 
-  toggleColumnDisplay() {
+  toggleColumnDisplay(element = "snippetBook") {
     const categoryColumn = document.querySelector('.CategoryColumn')
-    const snippetColumn = document.querySelector('.snippetColumn')
+    const snippetColumn = document.querySelector('.SnippetColumn')
 
-    if (appState["isCategoryColumnVisible"] === false) {
+    if (element === "snippetBook") this.clearEditor()
+
+    if (element === "category" && appState["isSnippetColumnVisible"] === false) {
+      snippetColumn.classList.remove('Hide')
+      appState["isSnippetColumnVisible"] = true
+    } else if (appState["isCategoryColumnVisible"] === false) {
       categoryColumn.classList.remove('Hide')
       appState["isCategoryColumnVisible"] = true
     } else if (appState["isCategoryColumnVisible"] === true && appState["isSnippetColumnVisible"] === false) {
       categoryColumn.classList.add('Hide')
       appState["isCategoryColumnVisible"] = false
-    } else if (appState["isCategoryColumnVisible"] === true && appState["isSnippetColumnVisible"] === true) {
+    } else if (element === "snippetBook" && appState["isCategoryColumnVisible"] === true && appState["isSnippetColumnVisible"] === true) {
       categoryColumn.classList.add('Hide')
       snippetColumn.classList.add('Hide')
       appState["isCategoryColumnVisible"] = false
       appState["isSnippetColumnVisible"] = false
     }
+  }
+
+  logUserOut = () => {
+    const configObject = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      }
+    }
+
+    fetch(`${baseUrl}logout`, configObject, {
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(json => handleSession(json))
+      .catch(error => console.log(error.message))
+
+      appState = {...app.state}
+  }
+
+  clearEditor() {
+    const editor = document.querySelector('.EditorColumn-editorArea')
+    editor.textContent = ""
   }
 }
 

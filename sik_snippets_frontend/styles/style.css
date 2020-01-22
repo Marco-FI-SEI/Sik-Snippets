@@ -243,6 +243,10 @@ html {
   background-color: black;
 }
 
+.EditorColumn-editorArea:focus {
+  outline-width: 0;
+}
+
 /* -------------------------------------------------- */
 /* TITLE */
 /* -------------------------------------------------- */

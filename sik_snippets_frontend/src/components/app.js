@@ -12,8 +12,9 @@ class App {
       isSignUpSelected: false,
       isCategoryColumnVisible: false,
       isSnippetColumnVisible: false,
-      currentUser: "",
-      selectedCategory: ""
+      currentUser: {},
+      selectedCategory: {},
+      selectedSnippet: {}
     }
 
     return state
