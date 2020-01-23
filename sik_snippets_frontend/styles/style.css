@@ -76,6 +76,11 @@ html {
   bottom: 20px;
 }
 
+.EditorColumn-save:hover {
+  border-color: red;
+  color: red;
+  transition: ease-in 0.2s;
+}
 
 /* -------------------------------------------------- */
 /* PAGE */
@@ -92,13 +97,13 @@ html {
 .Blackout {
   position: absolute;
   z-index: 1000;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 85%;
   background-color: var(--dark);
   display: none;
-  opacity: 0.9;
+  opacity: 0.99;
 }
 
 .Light {
@@ -109,10 +114,6 @@ html {
 .Hide {
   display: none;
 }
-
-/* .Page > * {
-  border: 2px solid yellow;
-} */
 
 /* -------------------------------------------------- */
 /* PROFILE */
@@ -132,7 +133,8 @@ html {
   grid-template-columns: 0.2fr 0.5fr 0.5fr 1.75fr;
 }
 
-.Profile, .Profile > * {
+.Profile,
+.Profile>* {
   border: 2px solid yellow;
 }
 
@@ -172,7 +174,8 @@ html {
   color: red;
 }
 
-.ListItem p, .Column input {
+.ListItem p,
+.Column input {
   display: inline-block;
   line-height: 50px;
   text-align: left;
@@ -240,13 +243,13 @@ html {
   height: 97%;
   border: none;
   color: white;
-  font-family:Consolas,
-  Monaco,
-  Lucida Console,
-  Liberation Mono,
-  DejaVu Sans Mono,
-  Bitstream Vera Sans Mono,
-  Courier New;
+  font-family: Consolas,
+    Monaco,
+    Lucida Console,
+    Liberation Mono,
+    DejaVu Sans Mono,
+    Bitstream Vera Sans Mono,
+    Courier New;
   font-size: 1rem;
   line-height: 1.5rem;
   margin: 20px;

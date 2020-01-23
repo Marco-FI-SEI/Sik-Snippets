@@ -14,7 +14,9 @@ class App {
       isSnippetColumnVisible: false,
       currentUser: {},
       selectedCategory: {},
-      selectedSnippet: {}
+      selectedSnippet: {},
+      loadedCategories: [],
+      loadedSnippets: []
     }
 
     return state

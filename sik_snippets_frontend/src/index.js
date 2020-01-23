@@ -29,12 +29,12 @@ const domElements = {
   formSubmit: document.querySelector('.Form-submitButton'),
 }
 
-const togglePageLightMode = () => {
-  domElements.page.classList.toggle('Light')
-  console.log(appState)
-}
+// const togglePageLightMode = () => {
+//   domElements.page.classList.toggle('Light')
+//   console.log(appState)
+// }
 
-const updateAppState = (...stateItems) => {
+const updateAppStateFlags = (...stateItems) => {
   for (const item of stateItems) {
     appState[item] = !appState[item]
   }
@@ -54,7 +54,7 @@ const displayFormModal = () => {
   domElements.formModal.classList.add('Visible')
   domElements.formModal.classList.add('Login')
   domElements.blackout.style.display = 'block'
-  updateAppState("isFormVisible")
+  updateAppStateFlags("isFormVisible")
 }
 
 const hideFormModal = () => {
@@ -62,10 +62,10 @@ const hideFormModal = () => {
   domElements.blackout.style.display = 'none'
 
   if (appState["isLoginSelected"]) {
-    updateAppState("isLoginSelected", "isFormVisible")
+    updateAppStateFlags("isLoginSelected", "isFormVisible")
     restoreForm()
   } else {
-    updateAppState("isSignupSelected", "isFormVisible")
+    updateAppStateFlags("isSignupSelected", "isFormVisible")
   }
 }
 
@@ -141,7 +141,7 @@ const handleSession = (data) => {
     resetPage()
   }
 
-  updateAppState("isUserLoggedIn")
+  updateAppStateFlags("isUserLoggedIn")
 }
 
 const createUser = (data) => {
@@ -159,7 +159,7 @@ const setCurrentUser = (user) => {
   appState["currentUser"] = user
 }
 
-destroyUser = () => {
+const destroyUser = () => {
   appState["currentUser"] = {}
 }
 
@@ -174,9 +174,9 @@ destroyUser = () => {
 domElements.authButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.className.includes("login")) {
-      updateAppState("isLoginSelected")
+      updateAppStateFlags("isLoginSelected")
     } else {
-      updateAppState("isSignupSelected")
+      updateAppStateFlags("isSignupSelected")
     }
     displayFormModal()
   })
